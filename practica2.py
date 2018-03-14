@@ -31,3 +31,5 @@ def busqueda_exponencial(lista,n,x):
     return busqueda_binaria(lista, x, limite//2,limite)
 
 print (busqueda_exponencial([1,2,3,4,5,6,7,8,9,10],9,1))
+
+
