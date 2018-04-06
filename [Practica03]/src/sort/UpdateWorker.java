@@ -134,24 +134,50 @@ public class UpdateWorker extends SwingWorker<BufferedImage, BufferedImage>{
     }
   }
 
+  private void auxMergeSort(int indiceMenor, int maximoIndice) {
+
+       if (indiceMenor < maximoIndice) {
+           int mitad = indiceMenor + (maximoIndice - indiceMenor) / 2;
+           auxMergeSort(indiceMenor, mitad);
+           auxMergeSort(mitad + 1, maximoIndice);
+           merge(indiceMenor, mitad, maximoIndice);
+       }
+
+   }
+
+   private void merge(int indiceMenor, int mitad, int maximoIndice) {
+          int[] temp;
+          temp = new int[arreglo.length];
+
+          for (int i = indiceMenor; i <= maximoIndice; i++) {
+              temp[i] = arreglo[i];
+          }
+          int i = indiceMenor;
+          int j = mitad + 1;
+          int k = indiceMenor;
+          while (i <= mitad && j <= maximoIndice) {
+              if (temp[i] <= temp[j]) {
+                  arreglo[k] = temp[i];
+                  i++;
+              } else {
+                  arreglo[k] = temp[j];
+                  j++;
+              }
+              k++;
+
+          }
+          while (i <= mitad) {
+              arreglo[k] = temp[i];
+              k++;
+              i++;
+
+          }
+
+      }
+
   private void mergeSort(){
-    /** if (izq<der){
-    int m=(izq+der)/2;
-    mergeSort(arreglo,izq, m);
-    mergeSort(arreglo,m+1, der);
-    int i, j, k;
-    int[]arreglo2 = new int[arreglo.length];
-    for (i= izq; i <= der; i++)
-      arreglo2[i] = arreglo[i];
-      i=izq; j=m+1; k=izq;
-      while (i <= m && j <= der)
-      if (arreglo2[i] <= arreglo2[j])
-        arreglo[k++] = arreglo[i++];
-      else
-        arreglo[k++] = arreglo[j++];
-      while (i <= m)
-        arreglo[k++] = arreglo[i++];;
-    } */
+        auxMergeSort(0, n-1);
+
   }
 
   public void swap(int i, int j){
